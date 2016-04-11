@@ -20,11 +20,11 @@ function kf_ppp = kf_test(ppp,i)
         newppp.ZZ(:,k) = zzk;
     end
     
-    kf_ppp = kf_filter(newppp,i);
+    kf_ppp = kf_filter(newppp);
     
     % this is figure A plot (XI)
     figure
-    x = 1:1:15;
+    x = 1:1:newppp.N;
     ax1 = subplot(2,1,1); % top subplot
     ax2 = subplot(2,1,2); % bottom subplot
     
@@ -42,7 +42,7 @@ function kf_ppp = kf_test(ppp,i)
     
     % this is figure B plot (XX)
     figure
-    x = 1:1:15;
+    x = 1:1:newppp.N;
     ax1 = subplot(2,1,1); % top subplot
     ax2 = subplot(2,1,2); % bottom subplot
     
@@ -64,7 +64,7 @@ function kf_ppp = kf_test(ppp,i)
     
     % this is figure C plot (XX and XH)
     figure
-    x = 1:1:15;
+    x = 1:1:newppp.N;
     ax1 = subplot(2,1,1); % top subplot
     ax2 = subplot(2,1,2); % bottom subplot
     
@@ -86,4 +86,3 @@ function kf_ppp = kf_test(ppp,i)
 end
 
 
-%plotting goes here

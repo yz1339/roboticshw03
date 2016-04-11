@@ -1,16 +1,13 @@
-function newppp = kf_filter(ppp,i)
+function kf_ppp = kf_filter(newppp)
     
-    newppp = ppp(i);
     k = 1;
     pk = newppp.Q;
 
     xhatk = newppp.XH(:,1);
     newppp.XH(:,1) = xhatk;
-    while k < newppp.N
-        
+    while k < newppp.N       
         k = k + 1;
         % predict
-        
         xhatk = newppp.A * xhatk;
         pk = newppp.A * pk * newppp.A;
         % update
@@ -21,7 +18,7 @@ function newppp = kf_filter(ppp,i)
        
     end
     %TODO: covariance P
-    
+    kf_ppp = newppp;
     
 end
 

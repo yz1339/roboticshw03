@@ -186,10 +186,10 @@ ppp(i).n = n;          % number of variables in state x
 ppp(i).A = eye(n);     % matrix A (temporarily the identity)
 ppp(i).m = m;          % number of variables in observation z
 ppp(i).H = eye(m,n);	% observation matrix H (temporarily identity)
-ppp(i).delta = 0.8;  	% decay rate
+ppp(i).delta = 0.5;  	% decay rate
 ppp(i).rho = 0.2;  	% sampling rate 
 ppp(i).s0 = 0; 		% initial distance
-ppp(i).v0 = 20;  	% initial speed
+ppp(i).v0 = 10;  	% initial speed
 % Noise parameters:
 ppp(i).ph = 0.2;	% initial uncertainty (p-hat)
 ppp(i).q = 0.2;		% process noise
@@ -231,34 +231,28 @@ ppp(i).PH{1} = ppp(i).P;			% covariance P at time t=1
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-i=3;	% second set of parameters (illustrative) 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % The only change in ppp(2) to ppp(1) is N become larger and
-        % XH(:,1) is a false state. So that we can prove that hold
-        % everything equal, kalman filter will recover from the initial
-        % false state.
+i=3;	% second set of parameters (illustrative)
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 n=2;	% state dimension
-m=2;	% observation dimension
+m=2;	% observation dimension (we can repeat an observations, etc)
 
 ppp(i).seed = 111;     % random seed to ensure repeatable tests
-ppp(i).N = 40;         % number of steps (perhaps we now need more steps...)
+ppp(i).N = 50;         % number of steps (perhaps we now need more steps...)
 % Physical Problem
 ppp(i).n = n;          % number of variables in state x
 ppp(i).A = eye(n);     % matrix A (temporarily the identity)
 ppp(i).m = m;          % number of variables in observation z
 ppp(i).H = eye(m,n);	% observation matrix H (temporarily identity)
 ppp(i).delta = 0.8;  	% decay rate
-ppp(i).rho = 0.2;  	% sampling rate 
-ppp(i).s0 = 0; 		% initial distance
-ppp(i).v0 = 20;  	% initial speed
+ppp(i).rho = 0.;  	% sampling rate 
+ppp(i).s0 = 10; 		% initial distance
+ppp(i).v0 = 50;  	% initial speed
 % Noise parameters:
 ppp(i).ph = 0.2;	% initial uncertainty (p-hat)
-ppp(i).q = 2;		% process noise -- large to prove the point that 
-                    % it takes a longer time from kalman filter to converge
-                    % to correct state
+ppp(i).q = 10;		% process noise -- large because we want to prove the point
+                    % it may take a long time for the Kalman filter to converge to the correct value
 ppp(i).r = 0.3;		% observation noise
-ppp(i).qh = 2;	% estimated process noise (q-hat)
+ppp(i).qh = 10;	% estimated process noise (q-hat)
 ppp(i).rh = 0.3;	% estimated observation noise (r-hat)
 
 ppp(i).XI = zeros(2, ppp(i).N);	% XI(:,k) is the ideal noise-free state at time k
@@ -272,7 +266,8 @@ ppp(i).XH = zeros(2, ppp(i).N);	% XX(:,k) is the estimated state at time k
 ppp(i).PH = cell(1, ppp(i).N);	% PH{k} is estimated covariance matrix P at time k
 				% NOTE: unlike the other arrays, PH is a cell array.
 
-ppp(i).XH(:,1) = -5; %We are using a false start to prove the point
+
+ppp(i).XH(:,1) = [ppp(i).s0; ppp(i).v0]; % + ppp(i).ph *randn(2,1); %We are using a false start to prove the point
                                          % that  Kalman filter is able to
                                          % recover from any initial false starts
 ppp(i).PH{1}   = ppp(i).ph *randn(2,1);
