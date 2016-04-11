@@ -1,3 +1,5 @@
+% this is a function to perform kalman filter on input ppp, which should
+% have observation states and actual states calculated.
 function kf_ppp = kf_filter(newppp)
     
     k = 1;
@@ -15,9 +17,10 @@ function kf_ppp = kf_filter(newppp)
         xhatk = xhatk + gk * (newppp.ZZ(:,k) - xhatk);
         newppp.XH(:,k) = xhatk;
         pk = (1 - gk) * pk;
-       
+        % covariance P
+        newppp.PH(:,k) = {cov(newppp.XH(:,k), newppp.ZZ(:,k))};
     end
-    %TODO: covariance P
+
     kf_ppp = newppp;
     
 end

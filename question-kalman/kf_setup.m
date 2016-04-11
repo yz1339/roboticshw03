@@ -171,10 +171,11 @@ ppp(i).PH{1} = ppp(i).P;			% covariance P at time t=1
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 i=2;	% second set of parameters (illustrative) 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % The only change in ppp(2) to ppp(1) is N become larger and
+        % The main change in ppp(2) to ppp(1) is N become larger and
         % XH(:,1) is a false state. So that we can prove that hold
         % everything equal, kalman filter will recover from the initial
-        % false state.
+        % false state. I am using lager velocity and larger decay rate so
+        % that the object move longer.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 n=2;	% state dimension
 m=2;	% observation dimension
@@ -272,9 +273,7 @@ ppp(i).XH = zeros(2, ppp(i).N);	% XX(:,k) is the estimated state at time k
 ppp(i).PH = cell(1, ppp(i).N);	% PH{k} is estimated covariance matrix P at time k
 				% NOTE: unlike the other arrays, PH is a cell array.
 
-ppp(i).XH(:,1) = -5; %We are using a false start to prove the point
-                                         % that  Kalman filter is able to
-                                         % recover from any initial false starts
+ppp(i).XH(:,1) = -5; %We are using the same false initial state with ppp(2) to prove that larger q will need more time to converge
 ppp(i).PH{1}   = ppp(i).ph *randn(2,1);
 
 %% SOME initializiation
