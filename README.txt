@@ -23,6 +23,10 @@ QUESTION 1C
 	Everything same with ppp(2) except q and qh to prove that kaman filter takes longer to converge to correct state with larger process noise. Notice that for figure_C, the kalman filter states converge with the actual states after time 15, which is longer than time needed in ppp(2). 
 
 QUESTION 2A
+	FOLDER: question-line-direct
+	- drawlineshv.m: contains the drawlineshv(impath) function that will draw the vertical and horizontal lines in the images that are fed to it. This function analyzes the sums of the values of the rows of the images and detects when there is a change (either increase or decrease) by analyzing the derivative of the data. Then the function calculates, based on these peaks of change where the vertical/horizontal lines are in the image.
+	-getIndexes.m a helper function that returns the indexes of where the lines are in an image.
+	-Lines5.png, Lines6.png, Lines7.png are extra pngs with straight edges used to test the algorithm.
 	
 QUESTION 2B 
 	drawlinesTest.m - to draw the line at different displacements and different angles.
