@@ -1,4 +1,4 @@
-function [A,B] = vote(angle, displacementIndex, array, angleArray) 
+function [A,B] = vote(x, y, mag, angle, displacementIndex, array, angleArray) 
     %if ismember(angle,angleArray) == 1
      angleIndex = 0;
      wasFound = -1;
@@ -8,7 +8,7 @@ function [A,B] = vote(angle, displacementIndex, array, angleArray)
          %disp('ANGLE!!!');
          %disp(angle);
          %disp(angleArray(i));
-        if angle == angleArray(i)
+        if round(angle) == round(angleArray(i))
             angleIndex = i;
             wasFound = 1;
             %disp(angleIndex);
@@ -21,9 +21,10 @@ function [A,B] = vote(angle, displacementIndex, array, angleArray)
         %disp('DISPLACEMENT AND ANGLE');
         %disp(displacementIndex);
         %disp(angleArray(angleIndex));
-        array(displacementIndex, angleIndex) = array(displacementIndex,angleIndex)+1;
-        %disp('final result');
-       % disp( array(displacementIndex, angleIndex));
+        array(displacementIndex, angleIndex) = array(displacementIndex,angleIndex)+mag(x,y);
+        disp('final result');
+        disp(displacementIndex);
+        disp( array(displacementIndex, angleIndex));
     else
         %disp('helloooo');
         %disp(size(array));
@@ -50,7 +51,7 @@ function [A,B] = vote(angle, displacementIndex, array, angleArray)
         %disp(displacementIndex);
         %disp(angleIndex);
         %disp(array(displacementIndex, angleIndex));
-        array(displacementIndex, angleIndex) = array(displacementIndex, angleIndex) + 1;
+        array(displacementIndex, angleIndex) = array(displacementIndex, angleIndex) + mag(x,y);
         %disp('lol!!!');
        % disp(array(displacementIndex, angleIndex));
        
