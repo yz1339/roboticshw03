@@ -1,7 +1,7 @@
 function findlineshv(impath)
 
 I = imread(impath);
-dims = size(I)
+dims = size(I);
 
 
 
@@ -42,15 +42,5 @@ for i = 1:numel(VerticalLinesIndex)
     line(x, y, 'LineWidth', 3, 'Color', 'r' );
     
 end
-
-
-
-
-
-
-%imshow(Horizontal)
-
-
-
 
 end
