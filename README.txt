@@ -23,8 +23,17 @@ QUESTION 1C
 	Everything same with ppp(2) except q and qh to prove that kaman filter takes longer to converge to correct state with larger process noise. Notice that for figure_C, the kalman filter states converge with the actual states after time 15, which is longer than time needed in ppp(2). 
 
 QUESTION 2A
-QUESTION 2B
+	
+QUESTION 2B 
+	drawlinesTest.m - to draw the line at different displacements and different angles.
+	Here I simply used the functionality of the drawlines.m file provided in order to plot lines. When coding I took into account the changes in negative and positive displacement based on the angle, and whether the line extended under (0,0), which is the origin.
+
 QUESTION 2C
+	findlines.m - the implementation of the Hough Algorithm
+        vote.m - the voting algorithm
+	Here I implemented the Hough Transform algorithm. The directional array output from the imgradient() function is converted to the correct range which is 0-180. A threshold was applied in order to only focus on the points that returned a significant magnitude from the imgradient() function in Matlab. While the points are selected, I manipulate x and y values to fit our image setup, select the angle from the directional array, calculate the displacement and vote using vote.m.
+	With these calculations, we find the local maxima, and draw the lines on the given image.
+
 
 FILES INCLUDED:
 
